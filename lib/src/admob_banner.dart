@@ -1,4 +1,4 @@
-import 'dart:io' show Platform;
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +11,14 @@ import 'admob_events.dart';
 class AdmobBanner extends StatefulWidget {
   final String adUnitId;
   final AdmobBannerSize adSize;
-  final void Function(AdmobAdEvent, Map<String, dynamic>) listener;
-  final void Function(AdmobBannerController) onBannerCreated;
+  final void Function(AdmobAdEvent, Map<String, dynamic>?)? listener;
+  final void Function(AdmobBannerController)? onBannerCreated;
   final bool nonPersonalizedAds;
 
   AdmobBanner({
-    Key key,
-    @required this.adUnitId,
-    @required this.adSize,
+    Key? key,
+    required this.adUnitId,
+    required this.adSize,
     this.listener,
     this.onBannerCreated,
     this.nonPersonalizedAds = false,
@@ -40,8 +40,8 @@ class AdmobBanner extends StatefulWidget {
 
 class _AdmobBannerState extends State<AdmobBanner> {
   final UniqueKey _key = UniqueKey();
-  AdmobBannerController _controller;
-  Future<Size> adSize;
+  late AdmobBannerController _controller;
+  Future<Size>? adSize;
 
   @override
   void initState() {
@@ -100,7 +100,7 @@ class _AdmobBannerState extends State<AdmobBanner> {
     _controller = AdmobBannerController(id, widget.listener);
 
     if (widget.onBannerCreated != null) {
-      widget.onBannerCreated(_controller);
+      widget.onBannerCreated!(_controller);
     }
   }
 
